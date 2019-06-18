@@ -1,0 +1,23 @@
+page-city-detail {
+  background-color: rgb(104, 151, 240);
+
+  ion-content {
+    .current-weather {
+      padding: 10px 0;
+      background-color: rgb(104, 151, 240);
+      .desc {
+        color: color($colors, "light");
+      }
+
+      .temperature {
+        color: color($colors, "light");
+        font-size: 6em;
+      }
+    }
+
+    ion-row {
+      background-color: rgb(104, 151, 240);
+      color: color($colors, "light");
+    }
+  }
+}

@@ -1,14 +1,77 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
+  <ion-navbar navbar color="primary">
+    <ion-title text-center>
+      Home
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addFavorite()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-grid *ngIf="locationMeteo" no-padding>
+    <ion-row class="section-title" align-items-center>
+      <ion-col>Ma position</ion-col>
+    </ion-row>
+    <ion-row class="city-row" nowrap align-items-center>
+      <ion-col class="temp">
+        {{ locationMeteo.main.temp | celsius }}°C
+      </ion-col>
+      <ion-col col-2>
+        <img
+          [src]="locationMeteo.weather[0].icon | weatherIcon"
+          [title]="locationMeteo.weather[0].main"
+          class="img"
+        />
+      </ion-col>
+      <ion-col col-7>
+        <div class="city-name">
+          {{ locationMeteo.name }}
+        </div>
+        <div class="weather-desc">
+          {{ locationMeteo.weather[0].description }}
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-icon
+          name="information-circle"
+          (click)="onCityDetail(locationMeteo.id, locationMeteo.name)"
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="favoritesMeteo.length > 0" no-padding>
+    <ion-row class="section-title" align-items-center>
+      <ion-col>Favoris</ion-col>
+    </ion-row>
+
+    <ion-row
+      class="city-row"
+      *ngFor="let city of favoritesMeteo"
+      nowrap
+      align-items-center
+    >
+      <ion-col class="temp"> {{ city.main.temp | celsius }}°C </ion-col>
+      <ion-col col-2>
+        <img
+          [src]="city.weather[0].icon | weatherIcon"
+          [title]="city.weather[0].main"
+        />
+      </ion-col>
+      <ion-col col-7>
+        <div class="city-name">{{ city.name }} - {{ city.sys.country }}</div>
+        <div class="weather-desc">{{ city.weather[0].description }}</div>
+      </ion-col>
+      <ion-col>
+        <ion-icon
+          name="information-circle"
+          (click)="onCityDetail(city.id, city.name)"
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

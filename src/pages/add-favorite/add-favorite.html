@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar navbar color="primary">
+    <ion-title>Add a Favorite</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar
+    #box
+    type="search"
+    placeholder="Start typing..."
+    (keyup)="updateList(box.value)"
+  ></ion-searchbar>
+
+  <ion-list *ngIf="matches.length > 0">
+    <button
+      ion-item
+      *ngFor="let match of matches"
+      (click)="onCityDetail(match.id, match.name)"
+    >
+      {{ match.name }} ({{ match.country }})
+    </button>
+  </ion-list>
+</ion-content>

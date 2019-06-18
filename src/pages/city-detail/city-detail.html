@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar navbar color="primary">
+    <ion-title text-center *ngIf="city">{{ city.name }}</ion-title>
+    <ion-buttons end>
+      <button *ngIf="isFavorite" ion-button icon-only (click)="delete()">
+        <ion-icon name="star"></ion-icon>
+      </button>
+      <button *ngIf="!isFavorite" ion-button icon-only (click)="add()">
+        <ion-icon name="star-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="current-weather" text-center *ngIf="city">
+    <div class="icon" text-center>
+      <img
+        [src]="city.weather[0].icon | weatherIcon"
+        [title]="city.weather[0].description"
+      />
+    </div>
+    <div class="desc" text-center>
+      {{ city.weather[0].description }}
+    </div>
+    <div class="temperature" text-center>{{ city.main.temp | celsius }}°C</div>
+  </div>
+  <ion-grid *ngIf="forecast" no-padding>
+    <ion-row *ngFor="let row of filteredResults()" nowrap align-items-center>
+      <ion-col text-center>{{ row.dt_txt | date: "EEEE" }}</ion-col>
+      <ion-col
+        ><img
+          [src]="row.weather[0].icon | weatherIcon"
+          [title]="row.weather[0].description"
+      /></ion-col>
+      <ion-col>{{ row.weather[0].description }}</ion-col>
+      <ion-col text-center>{{ row.main.temp | celsius }}°C</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,3 +1,34 @@
 page-home {
+  ion-content {
+  }
+  ion-row.section-title {
+    height: 50px;
+    background: rgb(8, 56, 78);
+    color: white;
+    padding-left: 20px;
+    font-weight: bold;
+  }
 
+  .city-row {
+    height: 50px;
+    background-color: rgb(104, 151, 240);
+  }
+
+  .temp {
+    margin-left: 10px;
+    color: yellow;
+    font-weight: bold;
+  }
+  .city-name {
+    color: yellow;
+    font-weight: bold;
+  }
+  .weather-desc {
+    color: color($colors, "light");
+  }
+
+  ion-icon {
+    font-size: 3em;
+    color: color($colors, "dark");
+  }
 }
